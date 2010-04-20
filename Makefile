@@ -1,7 +1,7 @@
-SOURCES=$(wildcard *.chpl)
+all: approx_pi hello beer_song
 
 %: %.chpl
 	chpl -o $* --fast $<
 
 clean: 
-	rm -f approx_pi
+	rm -f approx_pi hello beer_song
