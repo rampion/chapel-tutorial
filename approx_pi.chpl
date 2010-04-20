@@ -1,20 +1,23 @@
 use Random;
 
-config const n = 100000; // number of random points to generate
+config const tasks = 100;			// number of concurrent tasks
+config const points_per_task = 10000;  // number of random points to generate per task
 config const seed = 314159265; // random number generator to seed
+const points = tasks * points_per_task;
 
-writeln("Number of points     = ", n);
-writeln("Random number seed   = ", seed);
+writeln("Number of tasks           = ", tasks);
+writeln("Number of points per task = ", points_per_task);
+writeln("Random number seed        = ", seed);
 
-var rs = new RandomStream(seed, parSafe=true);
-var lock$ : sync bool;
-var count = 0;
-coforall i in 1..n do
-	if (rs.getNext()**2 + rs.getNext()**2 <= 1.0) {
-		lock$ = true;
-		count += 1;
-		lock$;
-	}
-delete rs;
+var count$ : sync int = 0;
+coforall i in 1..tasks{
+	
+	var rs = new RandomStream(seed+2*i, parSafe=false);
+	var lcount = 0;
+	for j in 1 .. points_per_task do lcount += (rs.getNext()**2 + rs.getNext()**2 <= 1.0);
 
-writeln("Approximation of PI = ", format("#.#######", count * 4.0 / n));
+	count$ += lcount;
+	delete rs;
+}
+
+writeln("Approximation of PI = ", format("#.#######", count$ * 4.0 / points ));
