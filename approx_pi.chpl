@@ -14,7 +14,7 @@ var count = 0;
 var taskspace: domain(1) = [1..tasks];
 var counts : [taskspace] int;
 
-coforall i in 1..tasks{
+forall i in taskspace {
 	var rs = new RandomStream(seed+2*i, parSafe=false);
 	var lcount = 0;
 
@@ -24,8 +24,6 @@ coforall i in 1..tasks{
 
 	delete rs;
 }
-forall i in 1 .. tasks {
-	count += counts[i];
-}
+for i in 1 .. tasks { count += counts[i]; }
 
 writeln("Approximation of PI = ", format("#.#######", count * 4.0 / points ));
