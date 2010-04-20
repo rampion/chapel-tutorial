@@ -1,1 +1,1 @@
-writeln("Hello, world!");
+writeln("I have ", here.numCores, " cores");
