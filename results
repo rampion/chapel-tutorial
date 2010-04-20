@@ -4,7 +4,7 @@ Number of points per task = 10000000
 Number of points          = 500000000
 Random number seed        = 314159265
 Approximation of PI = 3.1413952
-approx_pi --tasks=50 --points_per_task=10000000  48.33s user 0.14s system 172% cpu 28.094 total
+approx_pi --tasks=50 --points_per_task=10000000  48.58s user 0.16s system 171% cpu 28.445 total
 
 :! time approx_pi --tasks=1 --points_per_task=500000000
 Number of tasks           = 1
@@ -12,5 +12,4 @@ Number of points per task = 500000000
 Number of points          = 500000000
 Random number seed        = 314159265
 Approximation of PI = 3.1416042
-approx_pi --tasks=1 --points_per_task=500000000  48.26s user 0.18s system 93% cpu 51.707 total
-
+approx_pi --tasks=1 --points_per_task=500000000  48.26s user 0.18s system 93% cpu 51.941 total
